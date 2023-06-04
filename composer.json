@@ -1,0 +1,27 @@
+{
+    "name": "hussain/mvc",
+    "description": "PHP MVC Pattern",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php":">=7.4",
+        "pecee/simple-router": "dev-master",
+        "vlucas/phpdotenv": "5.5.x-dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        },
+        "files": [
+            "app/Master/helper.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Hussain Mahamud",
+            "email": "hussainmahamud.swe@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+    
+}
