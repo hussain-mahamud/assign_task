@@ -12,11 +12,11 @@ class Model
     public function connectDatabase(): \PDO
     {
         try {
-            $db_name=isset($_ENV['DB_NAME'])?$_ENV['DB_NAME']:'';
-            $db_user=isset($_ENV['DB_USER'])?$_ENV['DB_USER']:'';
-            $db_pass=isset($_ENV['DB_PASSWORD'])?$_ENV['DB_PASSWORD']:'';
-            $db_host=isset($_ENV['DB_HOST'])?$_ENV['DB_HOST']:'';
-            $db_port=isset($_ENV['DB_PORT'])?$_ENV['DB_PORT']:'';
+            $db_name=env('DB_NAME');
+            $db_user=env('DB_USER');
+            $db_pass=env('DB_PASSWORD');
+            $db_host=env('DB_HOST');
+            $db_port=env('DB_PORT');
             if(empty($db_name)){
                 throw new Exception('Please provide Database Name');
             }

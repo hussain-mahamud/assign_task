@@ -7,7 +7,8 @@ $dotenv->load();
 
 define('ROOT',__DIR__);
 define('VIEWS',__DIR__.'/views');
-
+define('BASE_DIR',isset($_ENV['BASE_DIR'])?$_ENV['BASE_DIR']:'');
+define('ASSET_URL',$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/'.BASE_DIR.'/assets');
 /* Load external routes file */
 require_once 'routes/route.php';
 
