@@ -39,26 +39,27 @@ class Model
             throw $th;
         }
     }
-    public function executeQuery($query)
+    public function executeQuery($query,array $params=[])
     {
-        $statement = $this->connectDatabase()->query($query);
-        $statement->execute();
+        $pdo=$this->connectDatabase();
+        $statement=$pdo->prepare($query);
+        $statement->execute($params);
         return $statement;
     }
-    public function fetchAll($query)
+    public function fetchAll($query,array $params=[])
     {
         try {
-            $statement = $this->executeQuery($query);
+            $statement = $this->executeQuery($query,$params);
             return $statement->fetchAll(\PDO::FETCH_ASSOC);
 
         } catch (\Throwable $th) {
             echo $th;
         }
     }
-    public function fetchObj($query)
+    public function fetchObj($query,array $params=[])
     {
         try {
-            $statement = $this->executeQuery($query);
+            $statement = $this->executeQuery($query,$params);
             return $statement->fetch(\PDO::FETCH_OBJ);
 
         } catch (\Throwable $th) {
