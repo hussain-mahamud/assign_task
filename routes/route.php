@@ -14,4 +14,6 @@ SimpleRouter::get('/mvc/hussain11/',function(){
 SimpleRouter::get(BASE_DIR. '/hussain',[HomeController::class,'index']);
 SimpleRouter::get(BASE_DIR.'/hussain1',[HomeController::class,'index1']);
 Route::get('buyer-demand',[BuyerDemandController::class,'index']);
-Route::get('report/buyer-demand',[BuyerDemandController::class,'getBuyerDemandData']);
+Route::post('buyer-demand',[BuyerDemandController::class,'storeBuyerDemand']);
+Route::get('report/buyer-demand',[BuyerDemandController::class,'getReportPanel']);
+Route::post('report/buyer-demand',[BuyerDemandController::class,'getBuyerDemandData']);
