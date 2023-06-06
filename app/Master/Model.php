@@ -66,4 +66,13 @@ class Model
             echo $th;
         }
     }
+    public function insert($query,array $params=[]){
+        try{
+            $statement = $this->executeQuery($query,$params);
+            return $statement->rowCount();
+        }
+        catch(\Throwable $th){
+            echo $th;
+        }
+    }
 }

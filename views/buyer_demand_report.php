@@ -1,6 +1,5 @@
 <?php views('/partials/header.php'); ?>
 <div class="container-sm">
-    <h3 class="text-center">Buyer Demand Submission Report</h3>
     <input type="hidden" name="_token" id="_token" value="<?php echo csrf_token(); ?>">
     <div class="row">
 
@@ -19,6 +18,34 @@
         <div class="col-md-3 mb-3">
             <label for="end_date" class="form-label"></label>
             <button type="submit" class="btn btn-primary form-control" onclick="getBuyerDemandData()">Show</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="card">
+            <div class="card-header text-center">
+                Buyer Demand Data
+            </div>
+            <div class="card-body">
+                <table id="buyerDemandTable" class="table">
+                    <thead>
+                        <tr>
+                            <th>SL</th>
+                            <th>BUYER</th>
+                            <th>AMOUNT</th>
+                            <th>RECEIPT ID</th>
+                            <th>ITEMS</th>
+                            <th>BUYER EMAIL</th>
+                            <th>NOTE</th>
+                            <th>CITY</th>
+                            <th>PHONE</th>
+                            <th>DATE</th>
+                            <th>ENTRY BY </th>
+                        </tr>
+                    </thead>
+                    <tbody id="content">
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
@@ -40,8 +67,39 @@
                 },
                 cache: false,
                 dataType: "json",
-                success: function(data) {
-                    console.log(data);
+                success: function (data) {
+                    var content = '';
+                    let count = 1;
+                    var success = data.success;
+                    var data = data.data;
+                    if (success) {
+                        for (var i = 0; i < data.length; i++) {
+                            content += `<tr><td>${count}</td>
+                                    <td>${data[i].buyer}</td>
+                                    <td>${data[i].amount}</td>
+                                    <td>${data[i].receipt_id}</td>
+                                    <td>${data[i].items}</td>
+                                    <td>${data[i].buyer_email}</td>
+                                    <td>${data[i].note}</td>
+                                    <td>${data[i].city}</td>
+                                    <td>${data[i].phone}</td>
+                                    <td>${data[i].entry_at}</td>
+                                    <td>${data[i].entry_by}</td></tr>`;
+                            count++;
+
+                        }
+                        $('#content').html(content);
+                        $('#buyerDemandTable').DataTable();
+                    }
+                    else{
+                        Swal.fire({
+                                title: 'Error',
+                                text: 'Please provide user id or date range',
+                                icon: 'error'
+                            });
+                    }
+
+
 
                 }
             });

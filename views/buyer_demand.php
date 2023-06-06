@@ -70,54 +70,72 @@
     </div>
 </div>
 <?php views('/partials/footer.php'); ?>
+
 <script>
-    $(document).ready(function() {
-    // Form submission event handler
-    $('form').submit(function(event) {
-        event.preventDefault(); // Prevent form submission
-        // extracting all input fields data
-        const amount = $('#amount').val();
-        const buyer = $('#buyer').val();
-        const receiptId = $('#receiptId').val();
-        const items = $('#items').val();
-        const buyerEmail = $('#buyerEmail').val();
-        const note = $('#note').val();
-        const city = $('#city').val();
-        const entryBy = $('#entryBy').val();
-        let phone = $('#phone').val();
-        phone=phone.replace(/^(0|\+|88|\(880\))0*/g, '');
-        phone='880'+phone;
-        let isValid=validateFormData(amount, buyer, receiptId, items, buyerEmail, note, city, phone, entryBy);
-        console.log(phone)
-        if (isValid) {
-            // Perform form submission via jQuery AJAX
-            //var formData = $('form').serialize();
-            const end_point = "<?php echo url('buyer-demand');?>";
-            $.ajax({
-                url: end_point,
-                type: 'POST',
-                data: {
-                    amount:amount,
-                    buyer: buyer,
-                    receiptId: receiptId,
-                    items: items,
-                    buyerEmail: buyerEmail,
-                    note: note,
-                    city: city,
-                    entryBy: entryBy,
-                    phone: phone
-                },
-                
-                success: function(response) {
-                    // Handle the success response
-                    console.log(response);
-                },
-                error: function(xhr, status, error) {
-                    // Handle the error response
-                    console.error(error);
-                }
-            });
-        }
+    $(document).ready(function () {
+        // Form submission event handler
+        $('form').submit(function (event) {
+            event.preventDefault(); // Prevent form submission
+            // extracting all input fields data
+            const amount = $('#amount').val();
+            const buyer = $('#buyer').val();
+            const receiptId = $('#receiptId').val();
+            const items = $('#items').val();
+            const buyerEmail = $('#buyerEmail').val();
+            const note = $('#note').val();
+            const city = $('#city').val();
+            const entryBy = $('#entryBy').val();
+            let phone = $('#phone').val();
+            phone = phone.replace(/^(0|\+|88|\(880\))0*/g, '');
+            phone = '880' + phone;
+            let isValid = validateFormData(amount, buyer, receiptId, items, buyerEmail, note, city, phone, entryBy);
+            console.log(phone)
+            if (isValid) {
+                // Perform form submission via jQuery AJAX
+                //var formData = $('form').serialize();
+                const end_point = "<?php echo url('buyer-demand'); ?>";
+                $.ajax({
+                    url: end_point,
+                    type: 'POST',
+                    data: {
+                        amount: amount,
+                        buyer: buyer,
+                        receipt_id: receiptId,
+                        items: items,
+                        buyer_email: buyerEmail,
+                        note: note,
+                        city: city,
+                        entry_by: entryBy,
+                        phone: phone
+                    },
+
+                    success: function (response) {
+                        response = JSON.parse(response);
+                        let isSuccess=response.success;
+                        let message=response.message;
+                        if (isSuccess) {
+                            Swal.fire({
+                                title: 'Success',
+                                text: message,
+                                icon: 'success'
+                            });
+                        } else {
+                            Swal.fire({
+                                title: 'Error',
+                                text: message,
+                                icon: 'error'
+                            });
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong!'
+                        })
+                    }
+                });
+            }
+        });
     });
-});
 </script>
