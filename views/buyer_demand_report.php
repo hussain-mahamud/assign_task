@@ -67,7 +67,7 @@
                 },
                 cache: false,
                 dataType: "json",
-                success: function (data) {
+                success: function(data) {
                     var content = '';
                     let count = 1;
                     var success = data.success;
@@ -75,13 +75,13 @@
                     if (success) {
                         for (var i = 0; i < data.length; i++) {
                             content += `<tr><td>${count}</td>
-                                    <td>${data[i].buyer}</td>
+                                    <td>${decodeHtmlEntities(data[i].buyer)}</td>
                                     <td>${data[i].amount}</td>
                                     <td>${data[i].receipt_id}</td>
-                                    <td>${data[i].items}</td>
+                                    <td>${decodeHtmlEntities(data[i].items)}</td>
                                     <td>${data[i].buyer_email}</td>
-                                    <td>${data[i].note}</td>
-                                    <td>${data[i].city}</td>
+                                    <td>${decodeHtmlEntities(data[i].note)}</td>
+                                    <td>${decodeHtmlEntities(data[i].city)}</td>
                                     <td>${data[i].phone}</td>
                                     <td>${data[i].entry_at}</td>
                                     <td>${data[i].entry_by}</td></tr>`;
@@ -89,14 +89,13 @@
 
                         }
                         $('#content').html(content);
-                       // $('#buyerDemandTable').DataTable();
-                    }
-                    else{
+                        // $('#buyerDemandTable').DataTable();
+                    } else {
                         Swal.fire({
-                                title: 'Error',
-                                text: 'Please provide user id or date range',
-                                icon: 'error'
-                            });
+                            title: 'Error',
+                            text: 'Please provide user id or date range',
+                            icon: 'error'
+                        });
                     }
 
 
@@ -106,5 +105,11 @@
         } else {
             alert("Please provide user_id or date range");
         }
+    }
+
+    function decodeHtmlEntities(text) {
+        var tempElement = document.createElement('div');
+        tempElement.innerHTML = text;
+        return tempElement.textContent || tempElement.innerText;
     }
 </script>

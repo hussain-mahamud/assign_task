@@ -130,7 +130,7 @@ class BuyerDemandController extends Controller
 
     private function validateBuyer($value, &$errors)
     {
-        $value = trim($value);
+        $value = $this->prepareInput($value);
 
         if (empty($value)) {
             $errors['buyer'] = 'Buyer field is required';
@@ -156,7 +156,7 @@ class BuyerDemandController extends Controller
 
     private function validateItems($value, &$errors)
     {
-        $value = trim($value);
+        $value = $this->prepareInput($value);
 
         if (empty($value)) {
             $errors['items'] = 'Items field is required';
@@ -182,7 +182,7 @@ class BuyerDemandController extends Controller
 
     private function validateNote($value, &$errors)
     {
-        $value = trim($value);
+        $value = $this->prepareInput($value);
 
         if (empty($value)) {
             $errors['note'] = 'Note field is required';
@@ -195,7 +195,7 @@ class BuyerDemandController extends Controller
 
     private function validateCity($value, &$errors)
     {
-        $value = trim($value);
+        $value = $this->prepareInput($value);
 
         if (empty($value)) {
             $errors['city'] = 'City field is required';
@@ -237,5 +237,12 @@ class BuyerDemandController extends Controller
         $salt = 'salt’ ';
 
         return hash('sha512', $receiptId . $salt);
+    }
+    private function prepareInput($data)
+    {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
     }
 }
