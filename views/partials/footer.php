@@ -15,10 +15,6 @@
 </script>
 <script src="<?php echo assets('js/buyer_demand.js'); ?>"></script>
 <script src="<?php echo assets('js/sweetalert2.min.js'); ?>"></script>
-<script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>
 <script>
     $(document).ready(function () {
         $('#items').trumbowyg({

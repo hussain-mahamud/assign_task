@@ -9,11 +9,11 @@
         </div>
         <div class="col-md-3 mb-3">
             <label for="start_date" class="form-label">Start Date</label>
-            <input type="text" class="form-control" id="start_date" name="start_date">
+            <input type="date" class="form-control input-date" id="start_date" name="start_date">
         </div>
         <div class="col-md-3 mb-3">
             <label for="end_date" class="form-label">End Date</label>
-            <input type="text" class="form-control" id="end_date" name="end_date">
+            <input type="date" class="form-control input-date" id="end_date" name="end_date">
         </div>
         <div class="col-md-3 mb-3">
             <label for="end_date" class="form-label"></label>
@@ -89,7 +89,7 @@
 
                         }
                         $('#content').html(content);
-                        $('#buyerDemandTable').DataTable();
+                       // $('#buyerDemandTable').DataTable();
                     }
                     else{
                         Swal.fire({
